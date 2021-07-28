@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tick_Cross</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Farro:wght@500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="tick-cross.css">
+    <script type="text/javascript" src="tick-cross.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Farro', sans-serif;
+}
+body{
+    background-color: #9dedf3;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px auto;
+    background-color: #272727;
+}
+table tr td{
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
+    font-size: 35px;
+    text-align: center;
+}
+table tr td:hover{
+    background-color: hsla(165, 91%, 9%, 0.774);
+    cursor: pointer;
+}
+.winner{
+    width: 240px;
+    height: 140px;
+    margin: 10px auto;
+    font-size: 60px;
+    text-align: center;
+}
+.winner span{
+    font-size: 40px;
+    display: block;
+}
+button{
+    width: 240px;
+    height: 100px;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    font-size: 40px;
+    color: #47d147;
+}
+.fafa-user-times{
+    background-color: red;
+}
+    </script>
+</head>
+
+<body>
+    
+    <center><div><h1>TURN</h1><button></button></center>
+      <table style="margin-top: 30px;">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+      </table>
+ <butoon class="btn btn-primary"></butoon>
+ <script>
+     $(document).ready(() => {
+  var move = 1;
+  var play = true;
+  $("table tr td").click(function () {
+    if ($(this).text() == "" && play) {
+      $("button").append("<i></i>");
+      if ((move % 2) == 1) {
+        $(this).append("X");
+        $(this).css('color', 'red');
+        $("button").removeClass("fa fa-user-times");
+        $("button").addClass("fa fa-user-circle").css({"font-size": "70px","color": "#47d147"});
+      }
+      else {
+        $(this).append("O");
+        $(this).css('color', 'rgba(71, 216, 71, 0.904)');
+         $("button").removeClass("fa fa-user-circle");
+        $("button").addClass("fa fa-user-times").css({"font-size": "70px","color":"red"});
+      }
+      move++;
+      if (findWinner() != -1 && findWinner() != "") {
+        if (findWinner() == "X") {
+          $('body').append('<div class="winner"> <span> Winner </span>X</div>');
+          $('body').append('<button onclick="location.reload()">Play Again</button>');
+          $('.winner').css('background-color', '#e85a4f');
+          $('.button').css('color', '#47d147');
+        }
+        else {
+          $('body').append('<div class="winner"> <span> Winner </span>O</div>');
+          $('body').append('<button onclick="location.reload()">Play Again</button>');
+          $('.winner').css('background-color', '#f2f2f2');
+          $('.button').css('color', '#47d147');
+
+        }
+        play = false;
+        console.log(play);
+      }
+
+    }
+    else if( findWinner() == -1)
+    {
+
+        $('body').append('<div class="winner"> <span> Draw </span>:(</div>');
+        $('body').append('<button onclick="location.reload()">Play Again</button>');
+        $('.winner').css('background-color', '#f2f2f2');
+        $('.button').css('color', '#47d147');
+
+
+    }
+  });
+
+  function findWinner() {
+    p1 = $("table tr:nth-child(1) td:nth-child(1)").text();
+    p2 = $("table tr:nth-child(1) td:nth-child(2)").text();
+    p3 = $("table tr:nth-child(1) td:nth-child(3)").text();
+    p4 = $("table tr:nth-child(2) td:nth-child(1)").text();
+    p5 = $("table tr:nth-child(2) td:nth-child(2)").text();
+    p6 = $("table tr:nth-child(2) td:nth-child(3)").text();
+    p7 = $("table tr:nth-child(3) td:nth-child(1)").text();
+    p8 = $("table tr:nth-child(3) td:nth-child(2)").text();
+    p9 = $("table tr:nth-child(3) td:nth-child(3)").text();
+    // check rows
+    if ((p1 == p2) && (p2 == p3)) {
+      return p3;
+    }
+    else if ((p4 == p5) && (p5 == p6)) {
+      return p6;
+    }
+    else if ((p7 == p8) && (p8 == p9)) {
+      return p9;
+    }
+    //check columns
+    else if ((p1 == p4) && (p4 == p7)) {
+      return p7;
+    }
+    else if ((p2 == p5) && (p5 == p8)) {
+      return p8;
+    }
+    else if ((p3 == p6) && (p6 == p9)) {
+      return p9;
+    }
+    //check digonal
+    else if ((p1 == p5) && (p5 == p9)) {
+      return p9;
+    }
+    else if ((p3 == p5) && (p5 == p7)) {
+      return p7;
+    }
+    //no winner
+    else {
+      return -1;
+    }
+  }
+});
+ </script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Farro', sans-serif;
+}
+body{
+    background-color: #9dedf3;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px auto;
+    background-color: #272727;
+}
+table tr td{
+    width: 120px;
+    height: 120px;
+    border: 1px solid black;
+    font-size: 35px;
+    text-align: center;
+}
+table tr td:hover{
+    background-color: hsla(165, 91%, 9%, 0.774);
+    cursor: pointer;
+}
+.winner{
+    width: 240px;
+    height: 140px;
+    margin: 10px auto;
+    font-size: 60px;
+    text-align: center;
+}
+.winner span{
+    font-size: 40px;
+    display: block;
+}
+button{
+    width: 240px;
+    height: 100px;
+    margin: 10px auto;
+    display: block;
+    border: none;
+    font-size: 40px;
+    color: #47d147;
+}
+.fafa-user-times{
+    background-color: red;
+}
